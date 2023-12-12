@@ -1,4 +1,4 @@
-import production.fruit_info as fruit_info
+import src.production.fruit_info as fruit_info
 import pandas as pd
 
 """
@@ -61,7 +61,7 @@ class Region():
         """
         Retrieves the specific fruit instance for the region.
         """
-        return fruit_info.get_fruit(self.fruit_type_num, self.variety,fruit_list)
+        return fruit_info.get_fruit(self.fruit_type_num, self.variety, fruit_list)
 
     def region_display(self, fruit_list):
         """

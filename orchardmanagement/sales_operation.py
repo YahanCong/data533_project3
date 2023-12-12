@@ -1,6 +1,5 @@
-import production.fruit_info as fruit_info
-from management.inventory import InventoryManagement
-from management.sales import SalesManagement
+from src.management.inventory import InventoryManagement
+from src.management import SalesManagement
 
 
 def sales_operator(extra_productivity_file, remaining_productivity_file, inventory_file, order_file):

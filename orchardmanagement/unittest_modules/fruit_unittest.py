@@ -4,11 +4,7 @@ import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import production.fruit_info as fruit_info
-
-
-
-
+import src.production.fruit_info as fruit_info
 
 
 class FruitTestCase(unittest.TestCase):
@@ -87,20 +83,20 @@ class FruitInfoTestCase(unittest.TestCase):
         print("Finish FruitInfoTestCase")
 
     def test_datetime_transfer(self):
-        self.assertEqual(fruit_info.datetime_transfer("09-21"),9)
+        self.assertEqual(fruit_info.datetime_transfer("09-21"), 9)
         self.assertEqual(fruit_info.datetime_transfer("09-04"), 9)
         self.assertEqual(fruit_info.datetime_transfer("12-21"), 12)
         self.assertEqual(fruit_info.datetime_transfer("9-21"), 9)
 
     def test_fruit_available_check(self):
-        self.assertTrue(fruit_info.fruit_available_check("09-21",self.a1))
+        self.assertTrue(fruit_info.fruit_available_check("09-21", self.a1))
         self.assertFalse(fruit_info.fruit_available_check("09-21", self.c1))
         self.assertFalse(fruit_info.fruit_available_check("12-21", self.p1))
         self.assertTrue(fruit_info.fruit_available_check("08-21", self.p2))
 
 
     def test_get_fruit(self):
-        self.assertEqual(fruit_info.get_fruit(1, "Ambrosia", self.fruit_list),self.a1)
+        self.assertEqual(fruit_info.get_fruit(1, "Ambrosia", self.fruit_list), self.a1)
         self.assertEqual(fruit_info.get_fruit(2, "Lapins", self.fruit_list), self.c1)
         self.assertEqual(fruit_info.get_fruit(3, "Elberta", self.fruit_list), self.p1)
         self.assertEqual(fruit_info.get_fruit(3, "Redhaven", self.fruit_list), self.p2)
@@ -214,7 +210,7 @@ class FruitInfoAddRemoveTestCase(unittest.TestCase):
         print("Finish FruitInfoAddRemoveTestCase")
 
     def test_add_fruit(self):
-        fruit_info.add_fruit(1,"Ambrosia","big","very sweet","less sour","crunchy",1.2,"pie",self.file_path)
+        fruit_info.add_fruit(1, "Ambrosia", "big", "very sweet", "less sour", "crunchy", 1.2, "pie", self.file_path)
         load_fruit_list = fruit_info.fruit_class_load(self.file_path)
         self.assertEqual(load_fruit_list[0].get_type_num(), self.a1.get_type_num())
         self.assertEqual(load_fruit_list[0].describe(), self.a1.describe())
@@ -224,13 +220,13 @@ class FruitInfoAddRemoveTestCase(unittest.TestCase):
             content = file.read()
         self.assertNotIn("1,Ambrosia,small,very sweet,less sour,crunchy,1.2,pie", content)
 
-        fruit_info.add_fruit(3,"Elberta","big","very sweet","less sour","crunchy",1.2,"pie", self.file_path)
+        fruit_info.add_fruit(3, "Elberta", "big", "very sweet", "less sour", "crunchy", 1.2, "pie", self.file_path)
         load_fruit_list = fruit_info.fruit_class_load(self.file_path)
         for i in range(0,len(load_fruit_list)):
             self.assertEqual(load_fruit_list[i].get_type_num(), self.fruit_list[i].get_type_num())
             self.assertEqual(load_fruit_list[i].describe(), self.fruit_list[i].describe())
 
-        self.assertFalse(fruit_info.add_fruit(2,"abc","small","median sweet","median sour","soft",2.99,"cans", self.file_path))
+        self.assertFalse(fruit_info.add_fruit(2, "abc", "small", "median sweet", "median sour", "soft", 2.99, "cans", self.file_path))
         load_fruit_list = fruit_info.fruit_class_load(self.file_path)
         for i in range(0, len(load_fruit_list)):
             self.assertEqual(load_fruit_list[i].get_type_num(), self.fruit_list[i].get_type_num())

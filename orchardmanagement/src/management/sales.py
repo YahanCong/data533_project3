@@ -1,8 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import csv
-import os
-from management.inventory import InventoryManagement
 
 
 class SalesManagement:

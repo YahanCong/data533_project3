@@ -3,8 +3,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import unittest
 import pandas as pd
-import production.fruit_info as fruit_info
-import production.plantation as plantation
+import src.production.fruit_info as fruit_info
+import src.production.plantation as plantation
 from io import StringIO
 
 
@@ -15,10 +15,10 @@ class RegionTestCase(unittest.TestCase):
         self.a1 = self.fruit_list[0]
         self.p1 = self.fruit_list[1]
         self.c1 = self.fruit_list[2]
-        self.r1 = plantation.Region(1,1,"Ambrosia",20,"market")
-        self.r2 = plantation.Region(2,3,"Elberta",30,"market")
-        self.r3 = plantation.Region(3,2,"Lapins",40,"pick")
-        self.r4 = plantation.Region(4,2,"Lapins",40,"pick")
+        self.r1 = plantation.Region(1, 1, "Ambrosia", 20, "market")
+        self.r2 = plantation.Region(2, 3, "Elberta", 30, "market")
+        self.r3 = plantation.Region(3, 2, "Lapins", 40, "pick")
+        self.r4 = plantation.Region(4, 2, "Lapins", 40, "pick")
         self.region_list = [self.r1, self.r2, self.r3, self.r4]
 
     def tearDown(self):
@@ -107,9 +107,9 @@ class RegionTestCase(unittest.TestCase):
 
     def test_get_region(self):
         r1_get = plantation.get_region(1, self.region_list)
-        r2_get = plantation.get_region(2,self.region_list)
-        r3_get = plantation.get_region(3,self.region_list)
-        r4_get = plantation.get_region(4,self.region_list)
+        r2_get = plantation.get_region(2, self.region_list)
+        r3_get = plantation.get_region(3, self.region_list)
+        r4_get = plantation.get_region(4, self.region_list)
         self.assertEqual(r1_get.regionId, self.r1.regionId)
         self.assertEqual(r1_get.fruit_type_num, self.r1.fruit_type_num)
         self.assertEqual(r1_get.variety, self.r1.variety)
@@ -226,7 +226,7 @@ class RegionTestCase(unittest.TestCase):
         self.assertEqual(df4["Ambrosia apple"]["marketing_regions_index"], '[1]')
 
     def test_area_summary(self):
-        df1 = plantation.area_summary(self.fruit_list,self.region_list)
+        df1 = plantation.area_summary(self.fruit_list, self.region_list)
         self.assertEqual(df1["picking_area"]["1 Ambrosia"], 0)
         self.assertEqual(df1["picking_area"]["3 Elberta"], 0)
         self.assertEqual(df1["picking_area"]["2 Lapins"], 80)
@@ -285,7 +285,7 @@ class RegionTestCase(unittest.TestCase):
         self.assertTrue(df2.equals(d3))
 
     def test_fruit_index_list(self):
-        i1, i2 = plantation.fruit_index_list(self.region_list,1,"Ambrosia")
+        i1, i2 = plantation.fruit_index_list(self.region_list, 1, "Ambrosia")
         self.assertEqual(i1, [])
         self.assertEqual(i2, [1])
 
@@ -313,7 +313,7 @@ class RegionTestCase(unittest.TestCase):
         df = pd.DataFrame(data)
         r_list_1 = plantation.region_class_tranfer(df)
         self.assertEqual(len(r_list_1),1)
-        self.assertTrue(isinstance(r_list_1[0],plantation.Region))
+        self.assertTrue(isinstance(r_list_1[0], plantation.Region))
 
         # test empty region dataframe
         data2 = {
@@ -350,7 +350,7 @@ class RegionTestCase(unittest.TestCase):
 
     def test_region_saving(self):
         file1 = "production_file_test/test_region.csv"
-        plantation.region_saving(file1,self.region_list)
+        plantation.region_saving(file1, self.region_list)
 
         with open(file1, 'r') as file:
             content = file.read()
