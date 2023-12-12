@@ -4,7 +4,7 @@ This repository contains the code for an Orchard Management Package, designed to
 The system is implemented in Python and utilizes the pandas library for data manipulation and matplotlib for plotting.
 
 
-[![Build Status](https://app.travis-ci.com/YahanCong/data533_project3.svg?branch=main)](https://app.travis-ci.com/YahanCong/data533_project3)
+[![Build Status](https://app.travis-ci.com/YahanCong/data533_project3.svg?token=ssrzsUE772FLzzmQR5X6&branch=main)](https://app.travis-ci.com/YahanCong/data533_project3)
 
 ## Table of Contents
 - [Production subpackage]
