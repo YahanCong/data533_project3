@@ -1,4 +1,4 @@
-from src import production as fruit_info
+import src.orchardmanagement_package.production.fruit_info as fruit_info
 from datetime import datetime
 
 

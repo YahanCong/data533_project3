@@ -1,4 +1,4 @@
-import src.production.fruit_info as fruit_info
+import src.orchardmanagement_package.production.fruit_info as fruit_info
 import pandas as pd
 
 """

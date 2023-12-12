@@ -1,5 +1,5 @@
-from src.management.inventory import InventoryManagement
-from src.management import SalesManagement
+from src.orchardmanagement_package.management.inventory import InventoryManagement
+from src.orchardmanagement_package.management.sales import SalesManagement
 
 
 def sales_operator(extra_productivity_file, remaining_productivity_file, inventory_file, order_file):
