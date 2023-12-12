@@ -3,8 +3,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import unittest
 import pandas as pd
-import src.production.fruit_info as fruit_info
-import src.production.plantation as plantation
+import src.orchardmanagement_package.production.fruit_info as fruit_info
+import src.orchardmanagement_package.production.plantation as plantation
 from io import StringIO
 
 

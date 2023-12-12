@@ -2,12 +2,14 @@ import os
 import sys
 from io import StringIO
 import pandas as pd
-import fruit_info_operation
-import plantation_operation
-import inventory_operation
-import sales_operation
-from src import management as inventory, production as fruit_info, production as plantation
-import src.management.sales as sales
+import src.orchardmanagement_package.production.fruit_info as fruit_info
+import src.orchardmanagement_package.production.plantation as plantation
+import src.orchardmanagement_package.management.inventory as inventory
+import src.orchardmanagement_package.management.sales as sales
+import src.orchardmanagement_package.fruit_info_operation as fruit_info_operation
+import src.orchardmanagement_package.plantation_operation as plantation_operation
+import src.orchardmanagement_package.inventory_operation as inventory_operation
+import src.orchardmanagement_package.sales_operation as sales_operation
 
 
 def basic_choice_select(fruit_file, plantation_file, extra_productivity_file, remaining_productivity_file,
@@ -140,27 +142,27 @@ if __name__ == '__main__':
     print("Welcome to the Orchard Management Software, where you can easily manage your orchard, record harvests, "
           "and create a fruitful orchard experience!")
     global fruit_file
-    fruit_info_relative_path = "src/production/fruits.csv"
+    fruit_info_relative_path = "production/fruits.csv"
     fruit_file = file_import(fruit_info_relative_path)
 
     global plantation_file
-    plantation_relative_path = "src/production/plantations.csv"
+    plantation_relative_path = "production/plantations.csv"
     plantation_file = file_import(plantation_relative_path)
 
     global extra_productivity_file
-    extra_productivity_relative_path = "src/management/extra_productivity.csv"
+    extra_productivity_relative_path = "management/extra_productivity.csv"
     extra_productivity_file = file_import(extra_productivity_relative_path)
 
     global remaining_productivity_file
-    remaining_productivity_path = "src/management/remaining_productivity.csv"
+    remaining_productivity_path = "management/remaining_productivity.csv"
     remaining_productivity_file = file_import(remaining_productivity_path)
 
     global inventory_file
-    inventory_file_path = "src/management/inventory.csv"
+    inventory_file_path = "management/inventory.csv"
     inventory_file = file_import(inventory_file_path)
 
     global order_file
-    order_file_path = "src/management/orders.csv"
+    order_file_path = "management/orders.csv"
     order_file = file_import(order_file_path)
 
     fruit_init(fruit_file)

@@ -1,4 +1,5 @@
-from src import production as fruit_info, production as plantation
+import src.orchardmanagement_package.production.fruit_info as fruit_info
+import src.orchardmanagement_package.production.plantation as plantation
 
 
 def region_operations(fruit_file, plantation_file):

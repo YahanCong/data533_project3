@@ -1,4 +1,4 @@
-from src import management as inventory
+from src.orchardmanagement_package import management as inventory
 
 
 def inventory_operator(extra_productivity_file, remaining_productivity_file, inventory_file):
