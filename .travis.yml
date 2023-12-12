@@ -1,2 +1,3 @@
 language: python
-script: true
+script: 
+  - python orchardmanagement/uniitest_modules/orchard_test_suite.py
