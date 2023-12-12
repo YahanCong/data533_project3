@@ -1,3 +1,10 @@
 language: python
-script: 
-  - python orchardmanagement/uniitest_modules/orchard_test_suite.py
+python:
+- "3.9"
+
+install:
+- pip install pandas
+- pip install matplotlib
+  
+script:
+- python orchardmanagement/unittest_modules/orchard_test_suite.py
