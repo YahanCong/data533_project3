@@ -1,6 +1,4 @@
-import production.fruit_info as fruit_info
-import production.plantation as plantation
-
+from src import production as fruit_info, production as plantation
 
 
 def region_operations(fruit_file, plantation_file):

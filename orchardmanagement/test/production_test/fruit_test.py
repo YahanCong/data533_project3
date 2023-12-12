@@ -1,4 +1,4 @@
-import production.fruit_info as fruit_info
+import src.production.fruit_info as fruit_info
 
 """
 This module is a test.py for fruit_info
@@ -56,7 +56,7 @@ big, less sour, very sweet, crunchy.It is good for pie
 """
 
 file_path = "fruits_test.csv"
-fruit_info.fruit_information_store(fruit_list,file_path)
+fruit_info.fruit_information_store(fruit_list, file_path)
 print(fruit_info.file_load(file_path))
 """
 expect output:
@@ -80,9 +80,9 @@ expect output:
 big, less sour, very sweet, crunchy.It is good for pie
 """
 
-fruit_info.add_fruit(1,"Gala", "big", "very sweet", "less sour", "crunchy", 1.2, "pie", file_path)
-fruit_info.remove_fruit(1, "Gala",file_path)
-fruit_info.add_fruit(1,"Ambrosia", "big", "very sweet", "less sour", "crunchy", 1.2, "pie", file_path)
+fruit_info.add_fruit(1, "Gala", "big", "very sweet", "less sour", "crunchy", 1.2, "pie", file_path)
+fruit_info.remove_fruit(1, "Gala", file_path)
+fruit_info.add_fruit(1, "Ambrosia", "big", "very sweet", "less sour", "crunchy", 1.2, "pie", file_path)
 """
 expect output:
 

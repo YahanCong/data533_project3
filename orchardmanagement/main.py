@@ -2,14 +2,12 @@ import os
 import sys
 from io import StringIO
 import pandas as pd
-import production.fruit_info as fruit_info
-import production.plantation as plantation
 import fruit_info_operation
 import plantation_operation
 import inventory_operation
 import sales_operation
-import management.inventory as inventory
-import management.sales as sales
+from src import management as inventory, production as fruit_info, production as plantation
+import src.management.sales as sales
 
 
 def basic_choice_select(fruit_file, plantation_file, extra_productivity_file, remaining_productivity_file,
@@ -70,12 +68,12 @@ def fruit_init(fruit_file):
     '''
     df = pd.DataFrame()
     df.to_csv(fruit_file, index=False)
-    fruit_info.add_fruit(1,"Ambrosia", "big", "very sweet",
-                         "less sour", "crunchy", 1.2, "pie",fruit_file)
-    fruit_info.add_fruit(3,"Elberta", "big", "very sweet",
-                         "less sour", "crunchy", 1.2, "pie",fruit_file)
-    fruit_info.add_fruit(2,"Lapins", "small", "median sweet",
-                         "median sour", "soft", 2.99, "cans",fruit_file)
+    fruit_info.add_fruit(1, "Ambrosia", "big", "very sweet",
+                         "less sour", "crunchy", 1.2, "pie", fruit_file)
+    fruit_info.add_fruit(3, "Elberta", "big", "very sweet",
+                         "less sour", "crunchy", 1.2, "pie", fruit_file)
+    fruit_info.add_fruit(2, "Lapins", "small", "median sweet",
+                         "median sour", "soft", 2.99, "cans", fruit_file)
 
 def plantation_init(fruit_file, plantation_file):
 
@@ -127,7 +125,7 @@ def sales_init(extra_productivity_file, remaining_productivity_file, inventory_f
     original_stdout = sys.stdout
     sys.stdout = StringIO()
     inventory_manager = inventory.InventoryManagement(extra_productivity_file, remaining_productivity_file,
-                                                      inventory_file,)
+                                                      inventory_file, )
     clear_csv_file(order_file)
     # Instantiate the SalesManagement class with the inventory manager
     sales_manager = sales.SalesManagement(inventory_manager, order_file)
@@ -142,27 +140,27 @@ if __name__ == '__main__':
     print("Welcome to the Orchard Management Software, where you can easily manage your orchard, record harvests, "
           "and create a fruitful orchard experience!")
     global fruit_file
-    fruit_info_relative_path = "production/fruits.csv"
+    fruit_info_relative_path = "src/production/fruits.csv"
     fruit_file = file_import(fruit_info_relative_path)
 
     global plantation_file
-    plantation_relative_path = "production/plantations.csv"
+    plantation_relative_path = "src/production/plantations.csv"
     plantation_file = file_import(plantation_relative_path)
 
     global extra_productivity_file
-    extra_productivity_relative_path = "management/extra_productivity.csv"
+    extra_productivity_relative_path = "src/management/extra_productivity.csv"
     extra_productivity_file = file_import(extra_productivity_relative_path)
 
     global remaining_productivity_file
-    remaining_productivity_path = "management/remaining_productivity.csv"
+    remaining_productivity_path = "src/management/remaining_productivity.csv"
     remaining_productivity_file = file_import(remaining_productivity_path)
 
     global inventory_file
-    inventory_file_path = "management/inventory.csv"
+    inventory_file_path = "src/management/inventory.csv"
     inventory_file = file_import(inventory_file_path)
 
     global order_file
-    order_file_path = "management/orders.csv"
+    order_file_path = "src/management/orders.csv"
     order_file = file_import(order_file_path)
 
     fruit_init(fruit_file)
