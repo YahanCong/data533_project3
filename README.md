@@ -3,6 +3,9 @@
 This repository contains the code for an Orchard Management Package, designed to manage fruit production, inventory, and sales. 
 The system is implemented in Python and utilizes the pandas library for data manipulation and matplotlib for plotting.
 
+
+[![Build Status](https://app.travis-ci.com/YahanCong/data533_project3.svg?branch=main)](https://app.travis-ci.com/YahanCong/data533_project3)
+
 ## Table of Contents
 - [Production subpackage]
   - [fruit_info.py]
