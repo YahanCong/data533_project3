@@ -73,6 +73,24 @@ class FruitInfoTestCase(unittest.TestCase):
         cls.p2 = fruit_info.Peach("Redhaven", "median", "median sweet", "less sour", "crunchy", 3.2, "pie, can")
         cls.fruit_list = [cls.a1,cls.p1,cls.c1,cls.p2]
 
+        curr_dict = os.path.dirname(os.path.abspath(__file__))
+        relative_files = ["production_file_test/test_non_exist.csv",
+                          "production_file_test/test_empty.csv",
+                          "production_file_test/test_one.csv",
+                          "production_file_test/test_mutiple.csv",
+                          "production_file_test/test_save.csv"]
+        cls.test_non_exist = os.path.join(curr_dict,relative_files[0])
+        cls.test_empty = os.path.join(curr_dict, relative_files[1])
+        cls.test_one = os.path.join(curr_dict, relative_files[2])
+        cls.test_mutiple = os.path.join(curr_dict, relative_files[3])
+        cls.test_save = os.path.join(curr_dict, relative_files[4])
+
+
+        #cls.csv_file_path = os.path.join(curr_dict,relative_file)
+
+
+
+
     @classmethod
     def tearDownClass(cls):
         del cls.a1
@@ -103,60 +121,60 @@ class FruitInfoTestCase(unittest.TestCase):
 
     def test_file_load(self):
         # test non exist file
-        self.assertIsNone(fruit_info.file_load("../production_file_test/test_non_exist.csv"))
+        self.assertIsNone(fruit_info.file_load(self.test_non_exist))
         # test empty file
-        self.assertEqual(fruit_info.file_load("production_file_test/test_empty.csv"), [])
+        self.assertEqual(fruit_info.file_load(self.test_empty), [])
         # test file with one line file
-        self.assertEqual(fruit_info.file_load("production_file_test/test_one.csv"),
+        self.assertEqual(fruit_info.file_load(self.test_one),
                          [['1', 'Ambrosia', 'big', 'very sweet', 'less sour', 'crunchy', '1.2', 'pie']])
         # test file with multiple line
-        self.assertEqual(fruit_info.file_load("production_file_test/test_mutiple.csv"),
+        self.assertEqual(fruit_info.file_load(self.test_mutiple),
                          [['1', 'Ambrosia', 'big', 'very sweet', 'less sour', 'crunchy', '1.2', 'pie'],
                           ['3', 'Elberta', 'big', 'very sweet', 'less sour', 'crunchy', '1.2', 'pie'],
                           ['2','Lapins','small','median sweet','median sour','soft','2.99', 'cans']])
 
     def test_fruit_class_load(self):
         # test non-exist file
-        self.assertIsNone(fruit_info.fruit_class_load("../production_file_test/test_non_exist.csv"))
+        self.assertIsNone(fruit_info.fruit_class_load(self.test_non_exist))
         # test empty file
-        self.assertEqual(fruit_info.fruit_class_load("production_file_test/test_empty.csv"), [])
+        self.assertEqual(fruit_info.fruit_class_load(self.test_empty), [])
         # test one-line file
-        load_a1 = fruit_info.fruit_class_load("production_file_test/test_one.csv")
+        load_a1 = fruit_info.fruit_class_load(self.test_one)
         self.assertEqual(len(load_a1),1)
         self.assertEqual(load_a1[0].get_type_num(), self.a1.get_type_num())
         self.assertEqual(load_a1[0].describe(),self.a1.describe())
         # test multiple-line file
-        load_fruit_list = fruit_info.fruit_class_load("production_file_test/test_mutiple.csv")
+        load_fruit_list = fruit_info.fruit_class_load(self.test_mutiple)
         self.assertEqual(len(load_fruit_list),3)
         for i in range(0,len(load_fruit_list)):
             self.assertEqual(load_fruit_list[i].get_type_num(), self.fruit_list[i].get_type_num())
             self.assertEqual(load_fruit_list[i].describe(), self.fruit_list[i].describe())
 
     def test_file_store(self):
-        fruit_info.file_store("production_file_test/test_save.csv", [[1, 2, 3]])
-        with open("production_file_test/test_save.csv", 'r') as file:
+        fruit_info.file_store(self.test_save, [[1, 2, 3]])
+        with open(self.test_save, 'r') as file:
             content = file.read()
         self.assertIn("1,2,3",content)
 
-        fruit_info.file_store("production_file_test/test_save.csv", [[1, 2, 3], [4, 5, 6]])
-        with open("production_file_test/test_save.csv", 'r') as file:
+        fruit_info.file_store(self.test_save, [[1, 2, 3], [4, 5, 6]])
+        with open(self.test_save, 'r') as file:
             content = file.read()
         self.assertIn("1,2,3", content)
         self.assertIn("4,5,6",content)
 
-        fruit_info.file_store("production_file_test/test_save.csv", [["abc", "bcd", "ace"]])
-        with open("production_file_test/test_save.csv", 'r') as file:
+        fruit_info.file_store(self.test_save, [["abc", "bcd", "ace"]])
+        with open(self.test_save, 'r') as file:
             content = file.read()
         self.assertIn("abc,bcd,ace", content)
 
-        fruit_info.file_store("production_file_test/test_save.csv", [["abc", 1, "bcd", 2, "ace"], ["efg", 1, "bcf", 2, "ace"]])
-        with open("production_file_test/test_save.csv", 'r') as file:
+        fruit_info.file_store(self.test_save, [["abc", 1, "bcd", 2, "ace"], ["efg", 1, "bcf", 2, "ace"]])
+        with open(self.test_save, 'r') as file:
             content = file.read()
         self.assertIn("abc,1,bcd,2,ace", content)
         self.assertIn("efg,1,bcf,2,ace", content)
 
     def test_fruit_information_store(self):
-        csv_test_save = "production_file_test/test_save.csv"
+        csv_test_save = self.test_save
         fruit_list_1 = [self.a1]
         fruit_list_2 = [self.a1, self.c1]
         fruit_list_3 = [self.p1, self.p2]
@@ -194,7 +212,9 @@ class FruitInfoAddRemoveTestCase(unittest.TestCase):
         cls.p1 = fruit_info.Peach("Elberta", "big", "very sweet", "less sour", "crunchy", 1.2, "pie")
         cls.p2 = fruit_info.Peach("Redhaven", "median", "median sweet", "less sour", "crunchy", 3.2, "pie, can")
         cls.fruit_list = [cls.a1, cls.p1, cls.c1, cls.p2]
-        cls.file_path = "production_file_test/test_fruit.csv"
+
+        curr_dict = os.path.dirname(os.path.abspath(__file__))
+        cls.file_path = os.path.join(curr_dict, "production_file_test/test_fruit.csv")
 
         with open(cls.file_path, 'w', newline='') as csvfile:
             csvfile.truncate(0)
