@@ -267,6 +267,10 @@ Initialize sales module
 - `clear_csv_file`: 
 Initialize files
 
+## Package Link
+[https://pypi.org/project/orchardmanagementCL/](https://pypi.org/project/orchardmanagementCL/)
 
+## Unit Test Report
+![Suite test report](orchardmanagement/unittest_modules/test_reports/total_orchard_unittest_coverage_report.png)
 
 
