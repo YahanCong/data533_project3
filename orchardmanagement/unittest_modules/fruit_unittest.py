@@ -4,7 +4,7 @@ import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import src.orchardmanagement_package.production.fruit_info as fruit_info
+import orchardmanagementpackage.production.fruit_info as fruit_info
 
 
 class FruitTestCase(unittest.TestCase):

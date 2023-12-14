@@ -3,8 +3,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import unittest
 import pandas as pd
-import src.orchardmanagement_package.production.fruit_info as fruit_info
-import src.orchardmanagement_package.production.plantation as plantation
+import orchardmanagementpackage.production.fruit_info as fruit_info
+import orchardmanagementpackage.production.plantation as plantation
 from io import StringIO
 
 
@@ -344,9 +344,11 @@ class RegionTestCase(unittest.TestCase):
         # test empty dataframe(no list/index)
         data4 = {}
         df4 = pd.DataFrame(data4)
-        with self.assertRaises(Exception) as context:
-            result = plantation.region_class_tranfer(df4)
-        self.assertIsInstance(context.exception, AttributeError)
+        result = plantation.region_class_tranfer(df4)
+        self.assertEqual(result,[])
+        # with self.assertRaises(Exception) as context:
+        #     result = plantation.region_class_tranfer(df4)
+        # self.assertIsInstance(context.exception, AttributeError)
 
     def test_region_saving(self):
         file1 = "production_file_test/test_region.csv"

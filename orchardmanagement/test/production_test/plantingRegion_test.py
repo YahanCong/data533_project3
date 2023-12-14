@@ -1,5 +1,5 @@
-import src.orchardmanagement_package.production.fruit_info as fruit_info
-import src.orchardmanagement_package.production.plantation as plantation
+import orchardmanagementpackage as fruit_info
+import orchardmanagementpackage.production.plantation as plantation
 fruit_list = fruit_info.fruit_class_load("fruits_test.csv")
 region_list = []
 area = 10
