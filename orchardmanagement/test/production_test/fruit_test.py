@@ -1,4 +1,4 @@
-import src.orchardmanagement_package.production.fruit_info as fruit_info
+import orchardmanagementpackage as fruit_info
 
 """
 This module is a test.py for fruit_info

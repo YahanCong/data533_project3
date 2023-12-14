@@ -6,8 +6,8 @@ import unittest
 import pandas as pd
 from unittest.mock import patch
 from io import StringIO
-from src.orchardmanagement_package.management.inventory import InventoryManagement
-from src.orchardmanagement_package.management.sales import SalesManagement
+from orchardmanagementpackage.management.inventory import InventoryManagement
+from orchardmanagementpackage.management.sales import SalesManagement
 
 
 class TestSalesManagement(unittest.TestCase):
