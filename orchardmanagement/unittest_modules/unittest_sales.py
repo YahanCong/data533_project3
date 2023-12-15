@@ -6,8 +6,8 @@ import unittest
 import pandas as pd
 from unittest.mock import patch
 from io import StringIO
-from src.orchardmanagement_package.management.inventory import InventoryManagement
-from src.orchardmanagement_package.management.sales import SalesManagement
+from orchardmanagementpackage.management.inventory import InventoryManagement
+from orchardmanagementpackage.management.sales import SalesManagement
 
 
 class TestSalesManagement(unittest.TestCase):
@@ -16,11 +16,14 @@ class TestSalesManagement(unittest.TestCase):
     def setUpClass(cls):
         print("Setting up class...")
         # Initialize common data for the entire test class
-        cls.inventory_origin_df = pd.read_csv("management_testing_files/inventory_origin.csv")
+        curr_dict = os.path.dirname(os.path.abspath(__file__))
+        cls.inventory_origin_df = pd.read_csv(os.path.join(curr_dict, "management_testing_files/inventory_origin.csv"))
         cls.remaining_productivity_origin_df = pd.read_csv(
-            "management_testing_files/remaining_productivity_origin.csv")
-        cls.extra_productivity_origin_df = pd.read_csv("management_testing_files/extra_productivity_origin.csv")
-        cls.orders_origin_df = pd.read_csv("management_testing_files/orders_origin.csv")
+            os.path.join(curr_dict, "management_testing_files/remaining_productivity_origin.csv"))
+        cls.extra_productivity_origin_df = pd.read_csv(
+            os.path.join(curr_dict, "management_testing_files/extra_productivity_origin.csv"))
+        cls.orders_origin_df = pd.read_csv(
+            os.path.join(curr_dict, "management_testing_files/orders_origin.csv"))
 
     @classmethod
     def tearDownClass(cls):

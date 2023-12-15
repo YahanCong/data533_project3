@@ -3,15 +3,30 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import unittest
 import pandas as pd
-import src.orchardmanagement_package.production.fruit_info as fruit_info
-import src.orchardmanagement_package.production.plantation as plantation
+import orchardmanagementpackage.production.fruit_info as fruit_info
+import orchardmanagementpackage.production.plantation as plantation
 from io import StringIO
 
 
 class RegionTestCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        curr_dict = os.path.dirname(os.path.abspath(__file__))
+        relative_files = ["production_file_test/test_mutiple.csv",
+                          "production_file_test/test_not_exist.csv",
+                          "production_file_test/test_empty.csv",
+                          "production_file_test/test_one_region.csv",
+                          "production_file_test/test_multiple_region.csv",
+                          "production_file_test/test_region.csv"]
+        cls.test_fruit = os.path.join(curr_dict,relative_files[0])
+        cls.test_not_exist = os.path.join(curr_dict,relative_files[1])
+        cls.test_empty = os.path.join(curr_dict, relative_files[2])
+        cls.test_one_region = os.path.join(curr_dict, relative_files[3])
+        cls.test_mutiple_region = os.path.join(curr_dict, relative_files[4])
+        cls.test_region = os.path.join(curr_dict, relative_files[5])
 
     def setUp(self):
-        self.fruit_list = fruit_info.fruit_class_load("production_file_test/test_mutiple.csv")
+        self.fruit_list = fruit_info.fruit_class_load(self.test_fruit)
         self.a1 = self.fruit_list[0]
         self.p1 = self.fruit_list[1]
         self.c1 = self.fruit_list[2]
@@ -253,15 +268,15 @@ class RegionTestCase(unittest.TestCase):
 
     def test_region_loading(self):
         # test not exist csv
-        d0 = plantation.region_loading("../production_file_test/test_not_exist.csv")
+        d0 = plantation.region_loading(self.test_not_exist)
         self.assertTrue(d0.empty)
 
         # test empty csv
-        d1 = plantation.region_loading("production_file_test/test_empty.csv")
+        d1 = plantation.region_loading(self.test_empty)
         self.assertTrue(d1.empty)
 
         # test one line csv
-        d2 = plantation.region_loading("production_file_test/test_one_region.csv")
+        d2 = plantation.region_loading(self.test_one_region)
         data = {
             'regionId': [1],
             'fruit_type_num': [1],
@@ -273,7 +288,7 @@ class RegionTestCase(unittest.TestCase):
         self.assertTrue(df.equals(d2))
 
         # test multiple line csv
-        d3 = plantation.region_loading("production_file_test/test_multiple_region.csv")
+        d3 = plantation.region_loading(self.test_mutiple_region)
         data2 = {
             'regionId': [1, 2, 3, 4],
             'fruit_type_num': [1, 3, 2, 2],
@@ -344,9 +359,11 @@ class RegionTestCase(unittest.TestCase):
         # test empty dataframe(no list/index)
         data4 = {}
         df4 = pd.DataFrame(data4)
-        with self.assertRaises(Exception) as context:
-            result = plantation.region_class_tranfer(df4)
-        self.assertIsInstance(context.exception, AttributeError)
+        result = plantation.region_class_tranfer(df4)
+        self.assertEqual(result,[])
+        # with self.assertRaises(Exception) as context:
+        #     result = plantation.region_class_tranfer(df4)
+        # self.assertIsInstance(context.exception, AttributeError)
 
     def test_region_saving(self):
         file1 = "production_file_test/test_region.csv"
@@ -380,7 +397,7 @@ class RegionTestCase(unittest.TestCase):
         self.assertIn("3,2,Lapins,40,pick", content)
 
     def test_add_region(self):
-        file1 = "production_file_test/test_region.csv"
+        file1 = self.test_region
 
         #check if add region with unexist fruit
         with self.assertRaises(plantation.FruitNoneException):
